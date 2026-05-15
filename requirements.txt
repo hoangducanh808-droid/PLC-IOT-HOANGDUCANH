@@ -7,3 +7,4 @@ streamlit-lottie
 requests
 scikit-learn
 numpy
+openpyxl
