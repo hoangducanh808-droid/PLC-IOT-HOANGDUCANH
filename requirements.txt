@@ -2,6 +2,8 @@ streamlit
 firebase-admin
 pandas
 plotly
+streamlit-autorefresh
+streamlit-lottie
+requests
 scikit-learn
 numpy
-streamlit-autorefresh
