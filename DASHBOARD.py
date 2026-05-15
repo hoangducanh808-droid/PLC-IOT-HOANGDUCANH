@@ -7,6 +7,23 @@ from streamlit_autorefresh import st_autorefresh
 import time
 import io
 
+# Kiểm tra nếu Firebase chưa được khởi tạo
+if not firebase_admin._apps:
+    try:
+        # Streamlit Cloud sẽ tự lấy thông tin từ mục "Secrets" mà bạn dán vào
+        cred_dict = dict(st.secrets["firebase"])
+        
+        # Sửa lỗi định dạng xuống dòng của Private Key
+        if "private_key" in cred_dict:
+            cred_dict["private_key"] = cred_dict["private_key"].replace("\\n", "\n")
+            
+        cred = credentials.Certificate(cred_dict)
+        firebase_admin.initialize_app(cred, {
+            'databaseURL': st.secrets["db_url"]
+        })
+    except Exception as e:
+        st.error(f"Lỗi kết nối Firebase: {e}")
+
 # =========================================================
 # 1. CẤU HÌNH FIREBASE
 # =========================================================
